@@ -8,6 +8,14 @@
   <meta property="og:title" content="임봉국 컨설팅 | AI 교육 강사" />
   <meta property="og:description" content="AI로 일하는 방식을 바꾸는 교육 강사" />
   <meta name="theme-color" content="#ff5a36" />
+  <!-- 앱(PWA) 설정 -->
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="임봉국" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Black+Han+Sans&display=swap" rel="stylesheet" />
@@ -215,6 +223,28 @@
 
     footer { padding: 36px 0 48px; text-align: center; color: var(--muted); font-size: 14px; }
 
+    /* ---------- 앱 설치 안내 ---------- */
+    .install {
+      position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 60;
+      transform: translate(-50%, 140%); transition: transform .35s ease;
+      display: flex; align-items: center; gap: 12px;
+      width: calc(100% - 32px); max-width: 440px;
+      background: var(--surface); border: 2px solid var(--ink); border-radius: 20px;
+      box-shadow: 5px 5px 0 var(--ink); padding: 12px 12px 12px 14px;
+    }
+    .install.show { transform: translate(-50%, 0); }
+    .install img { width: 44px; height: 44px; border-radius: 12px; flex: none; }
+    .install-text { flex: 1; line-height: 1.35; font-size: 14px; color: var(--muted); }
+    .install-text b { display: block; color: var(--ink); font-size: 15px; }
+    .install-go {
+      flex: none; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 2px solid var(--ink);
+      background: var(--primary); color: #fff; font: inherit; font-weight: 700; cursor: pointer;
+    }
+    .install-close {
+      flex: none; width: 36px; height: 36px; border: 0; background: none; font-size: 22px;
+      color: var(--muted); cursor: pointer; border-radius: 10px;
+    }
+
     /* ---------- 등장 애니메이션 ---------- */
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
     .reveal.in { opacity: 1; transform: none; }
@@ -410,7 +440,60 @@
     <div class="wrap">© <span id="year"></span> 임봉국 컨설팅. All rights reserved.</div>
   </footer>
 
+  <!-- 앱 설치 안내 (설치 가능한 기기에서만 나타남) -->
+  <div class="install" id="install" role="dialog" aria-label="앱 설치 안내" hidden>
+    <img src="/icons/icon-192.png" alt="" />
+    <div class="install-text"><b>앱으로 설치하기</b><span id="install-msg">홈 화면에서 바로 열 수 있어요</span></div>
+    <button class="install-go" id="install-go">설치</button>
+    <button class="install-close" id="install-close" aria-label="닫기">×</button>
+  </div>
+
   <script>
+    // 앱(PWA): 오프라인 지원 등록
+    if ('serviceWorker' in navigator) {
+      addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+    }
+
+    // 앱 설치 안내
+    (() => {
+      const box = document.getElementById('install');
+      const go = document.getElementById('install-go');
+      const msg = document.getElementById('install-msg');
+      const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+      let dismissed = false;
+      try { dismissed = localStorage.getItem('install-dismissed') === '1'; } catch (e) {}
+      if (standalone || dismissed) return;
+
+      const show = () => { box.hidden = false; requestAnimationFrame(() => box.classList.add('show')); };
+      const hide = () => { box.classList.remove('show'); setTimeout(() => box.hidden = true, 350); };
+      let deferred = null;
+
+      // 안드로이드·PC 크롬/엣지: 설치 버튼으로 바로 설치
+      addEventListener('beforeinstallprompt', e => {
+        e.preventDefault(); deferred = e; setTimeout(show, 2500);
+      });
+      go.addEventListener('click', async () => {
+        if (!deferred) return;
+        deferred.prompt();
+        await deferred.userChoice.catch(() => {});
+        deferred = null; hide();
+      });
+      addEventListener('appinstalled', hide);
+
+      // 아이폰·아이패드 사파리: 직접 추가하는 방법 안내
+      const ios = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      if (ios) {
+        msg.textContent = '아래 공유 버튼 → "홈 화면에 추가"를 눌러주세요';
+        go.hidden = true;
+        setTimeout(show, 2500);
+      }
+
+      document.getElementById('install-close').addEventListener('click', () => {
+        try { localStorage.setItem('install-dismissed', '1'); } catch (e) {}
+        hide();
+      });
+    })();
+
     // 연도 자동 표시
     document.getElementById('year').textContent = new Date().getFullYear();
 
