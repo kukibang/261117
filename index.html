@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>임봉국 컨설팅 | AI 교육 강사</title>
+  <meta name="description" content="AI로 일하는 방식을 바꾸는 교육 강사 임봉국 컨설팅을 소개합니다." />
+  <meta property="og:title" content="임봉국 컨설팅 | AI 교육 강사" />
+  <meta property="og:description" content="AI로 일하는 방식을 바꾸는 교육 강사" />
+  <meta name="theme-color" content="#ff5a36" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Black+Han+Sans&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <style>
+    /* ============================================================
+       색상·글꼴 설정 — 여기 값만 바꾸면 전체 분위기가 바뀝니다
+       ============================================================ */
+    :root {
+      --bg: #fffaf3;
+      --surface: #ffffff;
+      --ink: #1d1b2f;
+      --muted: #5f5b73;
+      --line: #ece4d8;
+      --primary: #ff5a36;   /* 메인 포인트 색 (주황) */
+      --sun: #ffc93c;       /* 노랑 */
+      --mint: #2ec4a6;      /* 민트 */
+      --sky: #4d8dff;       /* 파랑 */
+      --radius: 22px;
+      --shadow: 0 10px 30px rgba(29, 27, 47, 0.08);
+      --max: 1120px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+      word-break: keep-all;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+
+    /* ---------- 상단 메뉴 ---------- */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255, 250, 243, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color .2s;
+    }
+    header.scrolled { border-bottom-color: var(--line); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo {
+      font-family: "Black Han Sans", sans-serif;
+      font-size: 24px; text-decoration: none; letter-spacing: .5px;
+    }
+    .logo span { color: var(--primary); }
+    .menu { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+    .menu a { text-decoration: none; font-weight: 600; color: var(--muted); transition: color .15s; }
+    .menu a:hover { color: var(--primary); }
+    .menu-btn {
+      display: none; width: 44px; height: 44px; border: 0; background: none;
+      cursor: pointer; padding: 10px; border-radius: 12px;
+    }
+    .menu-btn span { display: block; height: 3px; background: var(--ink); border-radius: 3px; margin: 5px 0; transition: transform .25s, opacity .25s; }
+    .menu-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .menu-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* ---------- 첫 화면 ---------- */
+    .hero { position: relative; padding: 80px 0 100px; overflow: hidden; }
+    .blob { position: absolute; border-radius: 50%; filter: blur(2px); opacity: .9; z-index: -1; }
+    .blob.b1 { width: 380px; height: 380px; background: var(--sun); top: -120px; right: -80px; }
+    .blob.b2 { width: 220px; height: 220px; background: var(--mint); bottom: -60px; left: -70px; opacity: .55; }
+    .blob.b3 { width: 90px; height: 90px; background: var(--sky); top: 40%; right: 38%; opacity: .35; }
+    .hero-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 56px; align-items: center; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--surface); border: 2px solid var(--ink);
+      padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 14px;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .badge i { width: 9px; height: 9px; border-radius: 50%; background: var(--mint); display: inline-block; animation: pulse 1.6s infinite; }
+    @keyframes pulse { 50% { transform: scale(1.6); opacity: .5; } }
+    h1 {
+      font-family: "Black Han Sans", sans-serif; font-weight: 400;
+      font-size: clamp(40px, 7vw, 76px); line-height: 1.15; margin: 22px 0 18px;
+    }
+    h1 .hl { color: var(--primary); position: relative; white-space: nowrap; }
+    h1 .hl::after {
+      content: ""; position: absolute; left: -4px; right: -4px; bottom: 6px; height: 16px;
+      background: var(--sun); z-index: -1; border-radius: 6px; transform: rotate(-1.5deg);
+    }
+    .lead { font-size: clamp(17px, 2.2vw, 20px); color: var(--muted); max-width: 30em; margin: 0 0 32px; }
+    .btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 52px; padding: 0 26px; border-radius: 999px;
+      font-weight: 700; font-size: 16px; text-decoration: none;
+      border: 2px solid var(--ink); transition: transform .15s, box-shadow .15s;
+    }
+    .btn.primary { background: var(--primary); color: #fff; box-shadow: 4px 4px 0 var(--ink); }
+    .btn.ghost { background: var(--surface); box-shadow: 4px 4px 0 var(--ink); }
+    .btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+    .btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+
+    .photo-card { position: relative; justify-self: center; width: 100%; max-width: 380px; }
+    .photo {
+      aspect-ratio: 4 / 5; border-radius: 32px; border: 3px solid var(--ink);
+      background: linear-gradient(135deg, #ffd8c9, #ffe9a8);
+      box-shadow: 10px 10px 0 var(--ink);
+      display: grid; place-items: center; overflow: hidden;
+      font-size: 96px;
+    }
+    .photo img { width: 100%; height: 100%; object-fit: cover; }
+    .sticker {
+      position: absolute; background: var(--surface); border: 2px solid var(--ink);
+      border-radius: 16px; padding: 10px 14px; font-weight: 700; font-size: 14px;
+      box-shadow: 3px 3px 0 var(--ink); line-height: 1.3;
+    }
+    .sticker b { display: block; font-size: 22px; color: var(--primary); font-family: "Black Han Sans", sans-serif; font-weight: 400; }
+    .sticker.s1 { left: -24px; bottom: 40px; transform: rotate(-4deg); }
+    .sticker.s2 { right: -18px; top: 30px; transform: rotate(5deg); background: var(--mint); color: #fff; }
+    .sticker.s2 b { color: #fff; }
+
+    /* ---------- 공통 섹션 ---------- */
+    section { padding: 90px 0; }
+    .eyebrow { font-weight: 800; color: var(--primary); letter-spacing: 2px; font-size: 14px; text-transform: uppercase; }
+    h2 {
+      font-family: "Black Han Sans", sans-serif; font-weight: 400;
+      font-size: clamp(32px, 5vw, 48px); line-height: 1.2; margin: 8px 0 20px;
+    }
+
+    /* ---------- 소개 ---------- */
+    #about { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; align-items: start; }
+    .about-text p { margin: 0 0 16px; color: var(--muted); }
+    .about-text strong { color: var(--ink); }
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .card {
+      border-radius: var(--radius); padding: 24px; border: 2px solid var(--ink);
+      box-shadow: 4px 4px 0 var(--ink); transition: transform .2s;
+    }
+    .card:hover { transform: translateY(-4px) rotate(-.5deg); }
+    .card .ico { font-size: 32px; line-height: 1; }
+    .card h3 { margin: 12px 0 6px; font-size: 19px; }
+    .card p { margin: 0; font-size: 15px; color: var(--ink); opacity: .78; }
+    .c1 { background: #fff1ec; } .c2 { background: #fff7db; } .c3 { background: #e5f8f4; } .c4 { background: #eaf1ff; }
+
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px; }
+    .stat { text-align: center; padding: 22px 10px; border-radius: var(--radius); background: var(--bg); border: 1px solid var(--line); }
+    .stat b { display: block; font-family: "Black Han Sans", sans-serif; font-weight: 400; font-size: clamp(32px, 5vw, 44px); color: var(--primary); line-height: 1.1; }
+    .stat span { color: var(--muted); font-size: 15px; }
+
+    /* ---------- 경력 ---------- */
+    .timeline { position: relative; margin-top: 40px; padding-left: 36px; }
+    .timeline::before {
+      content: ""; position: absolute; left: 11px; top: 8px; bottom: 8px; width: 3px;
+      background: repeating-linear-gradient(var(--ink) 0 8px, transparent 8px 14px);
+    }
+    .item { position: relative; margin-bottom: 26px; }
+    .item::before {
+      content: ""; position: absolute; left: -36px; top: 22px; width: 25px; height: 25px;
+      border-radius: 50%; background: var(--sun); border: 3px solid var(--ink);
+    }
+    .item:nth-child(3n+2)::before { background: var(--mint); }
+    .item:nth-child(3n+3)::before { background: var(--primary); }
+    .item-box {
+      background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius);
+      padding: 22px 26px; box-shadow: 4px 4px 0 var(--ink);
+    }
+    .period {
+      display: inline-block; font-size: 13px; font-weight: 800; padding: 3px 12px;
+      border-radius: 999px; background: var(--ink); color: #fff; margin-bottom: 8px;
+    }
+    .item h3 { margin: 0; font-size: 20px; line-height: 1.4; }
+    .item .org { color: var(--primary); font-weight: 700; font-size: 15px; }
+    .item p { margin: 8px 0 0; color: var(--muted); font-size: 15.5px; }
+
+    .certs { margin-top: 48px; }
+    .certs h3 { font-size: 20px; margin: 0 0 14px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip {
+      padding: 8px 16px; border-radius: 999px; background: var(--surface);
+      border: 2px solid var(--ink); font-weight: 600; font-size: 15px;
+    }
+
+    /* ---------- 연락 ---------- */
+    .cta {
+      background: var(--primary); color: #fff; border-radius: 36px; border: 3px solid var(--ink);
+      box-shadow: 8px 8px 0 var(--ink); padding: 56px 40px; text-align: center; position: relative; overflow: hidden;
+    }
+    .cta::before, .cta::after { content: ""; position: absolute; border-radius: 50%; background: var(--sun); }
+    .cta::before { width: 160px; height: 160px; top: -60px; left: -40px; opacity: .9; }
+    .cta::after { width: 110px; height: 110px; bottom: -40px; right: 30px; background: var(--mint); }
+    .cta > * { position: relative; z-index: 1; }
+    .cta h2 { color: #fff; margin-top: 0; }
+    .cta p { margin: 0 auto 28px; max-width: 32em; opacity: .95; }
+    .cta .btn.ghost { color: var(--ink); }
+    .socials { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+    .socials a {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 18px;
+      border-radius: 999px; background: rgba(255,255,255,.18); color: #fff; text-decoration: none; font-weight: 600;
+      border: 1.5px solid rgba(255,255,255,.6);
+    }
+    .socials a:hover { background: rgba(255,255,255,.3); }
+
+    footer { padding: 36px 0 48px; text-align: center; color: var(--muted); font-size: 14px; }
+
+    /* ---------- 등장 애니메이션 ---------- */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .badge i { animation: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ============================================================
+       태블릿 (≤ 900px)
+       ============================================================ */
+    @media (max-width: 900px) {
+      .hero { padding: 48px 0 80px; }
+      .hero-grid, .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .hero-grid .photo-card { order: -1; max-width: 300px; }
+      .hero-text { text-align: center; }
+      .lead { margin-left: auto; margin-right: auto; }
+      .btns { justify-content: center; }
+      section { padding: 72px 0; }
+    }
+
+    /* ============================================================
+       모바일 (≤ 680px)
+       ============================================================ */
+    @media (max-width: 680px) {
+      body { font-size: 16px; }
+      .wrap { padding: 0 16px; }
+      .menu-btn { display: block; }
+      .menu {
+        position: absolute; top: 64px; left: 0; right: 0;
+        flex-direction: column; gap: 0; background: var(--bg);
+        border-bottom: 2px solid var(--ink);
+        max-height: 0; overflow: hidden; transition: max-height .3s ease;
+      }
+      .menu.open { max-height: 320px; }
+      .menu li a { display: block; padding: 16px 20px; font-size: 18px; border-top: 1px solid var(--line); }
+      .blob.b1 { width: 240px; height: 240px; top: -80px; right: -90px; }
+      .blob.b3 { display: none; }
+      .photo-card { max-width: 250px !important; }
+      .photo { box-shadow: 7px 7px 0 var(--ink); }
+      .sticker { font-size: 12px; padding: 8px 10px; }
+      .sticker b { font-size: 18px; }
+      .sticker.s1 { left: -14px; }
+      .sticker.s2 { right: -10px; }
+      .btns .btn { flex: 1 1 100%; }
+      .cards { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 40px; }
+      .stat { padding: 16px 4px; }
+      .stat span { font-size: 13px; }
+      .timeline { padding-left: 30px; }
+      .timeline::before { left: 8px; }
+      .item::before { left: -30px; width: 21px; height: 21px; }
+      .item-box { padding: 18px 18px; }
+      .item h3 { font-size: 18px; }
+      .cta { padding: 44px 22px; border-radius: 28px; box-shadow: 6px 6px 0 var(--ink); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ======================= 상단 메뉴 ======================= -->
+  <header id="top">
+    <nav class="wrap nav" aria-label="주 메뉴">
+      <a href="#" class="logo">임봉국 컨설팅<span>.</span></a>
+      <button class="menu-btn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="menu" id="menu">
+        <li><a href="#about">소개</a></li>
+        <li><a href="#career">경력</a></li>
+        <li><a href="#contact">연락하기</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ======================= 첫 화면 ======================= -->
+    <section class="hero">
+      <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+      <div class="wrap hero-grid">
+        <div class="hero-text">
+          <span class="badge"><i></i> 강의·협업 문의 받는 중</span>
+          <h1>AI로 일하는 방식을<br /><span class="hl">즐겁게</span> 바꿉니다</h1>
+          <p class="lead">안녕하세요, <strong>임봉국 컨설팅</strong>입니다. 누구나 오늘 바로 써먹을 수 있는 AI 활용법을 쉽고 재미있게 알려드려요.</p>
+          <div class="btns">
+            <a href="#contact" class="btn primary">함께 일하기 →</a>
+            <a href="#career" class="btn ghost">경력 보기</a>
+          </div>
+        </div>
+        <div class="photo-card">
+          <!-- 프로필 사진: 폴더에 profile.jpg를 넣고 아래 이모지 대신 <img src="profile.jpg" alt="임봉국 컨설팅 프로필 사진" /> 로 바꾸세요 -->
+          <div class="photo" role="img" aria-label="프로필 사진 자리">🙋</div>
+          <div class="sticker s1"><b>10년+</b>현장 경험</div>
+          <div class="sticker s2"><b>3,000명</b>수강생</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= 소개 ======================= -->
+    <section id="about">
+      <div class="wrap">
+        <div class="about-grid">
+          <div class="about-text reveal">
+            <div class="eyebrow">About me</div>
+            <h2>어려운 기술을<br />쉬운 말로 전합니다</h2>
+            <p>저는 <strong>기업과 개인이 AI를 실제 업무에 활용</strong>할 수 있도록 돕는 교육 강사입니다.</p>
+            <p>복잡한 이론보다 <strong>내일 출근해서 바로 쓸 수 있는 방법</strong>을 알려드리는 것을 가장 중요하게 생각해요. 직접 따라 하며 결과물을 만드는 실습 중심 강의로 많은 분들과 함께해 왔습니다.</p>
+            <p>배우는 시간이 즐거워야 오래 남는다고 믿습니다.</p>
+          </div>
+          <div class="cards reveal">
+            <div class="card c1"><div class="ico">🤖</div><h3>AI 업무 자동화</h3><p>반복 업무를 AI로 줄이는 실전 노하우</p></div>
+            <div class="card c2"><div class="ico">🎤</div><h3>기업 교육·특강</h3><p>임직원 눈높이에 맞춘 맞춤형 강의</p></div>
+            <div class="card c3"><div class="ico">✍️</div><h3>콘텐츠 제작</h3><p>AI로 글·이미지·영상 만들기</p></div>
+            <div class="card c4"><div class="ico">🤝</div><h3>1:1 컨설팅</h3><p>팀과 개인에 맞는 도입 전략 설계</p></div>
+          </div>
+        </div>
+        <div class="stats reveal">
+          <div class="stat"><b data-count="10">0</b><span>년 경력</span></div>
+          <div class="stat"><b data-count="150">0</b><span>회 강의</span></div>
+          <div class="stat"><b data-count="3000">0</b><span>명 수강생</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= 경력 ======================= -->
+    <section id="career">
+      <div class="wrap">
+        <div class="reveal">
+          <div class="eyebrow">Career</div>
+          <h2>지금까지 걸어온 길</h2>
+        </div>
+
+        <!-- 경력 항목: <div class="item">…</div> 블록을 복사해서 추가·수정하세요 -->
+        <div class="timeline">
+          <div class="item reveal">
+            <div class="item-box">
+              <span class="period">2023 — 현재</span>
+              <h3>AI 활용 교육 전문 강사</h3>
+              <div class="org">프리랜서</div>
+              <p>기업·공공기관 대상 생성형 AI 업무 활용 교육 및 특강 진행</p>
+            </div>
+          </div>
+          <div class="item reveal">
+            <div class="item-box">
+              <span class="period">2019 — 2023</span>
+              <h3>디지털 전환 팀장</h3>
+              <div class="org">○○ 주식회사</div>
+              <p>사내 업무 자동화 도입 및 임직원 디지털 역량 교육 총괄</p>
+            </div>
+          </div>
+          <div class="item reveal">
+            <div class="item-box">
+              <span class="period">2015 — 2019</span>
+              <h3>마케팅 매니저</h3>
+              <div class="org">△△ 컴퍼니</div>
+              <p>온라인 마케팅 전략 수립과 데이터 기반 캠페인 운영</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="certs reveal">
+          <h3>🏅 자격·수상</h3>
+          <div class="chips">
+            <span class="chip">○○ 자격증</span>
+            <span class="chip">△△ 우수강사상</span>
+            <span class="chip">□□대학교 졸업</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= 연락하기 ======================= -->
+    <section id="contact">
+      <div class="wrap">
+        <div class="cta reveal">
+          <h2>함께 이야기해요!</h2>
+          <p>강의, 협업, 컨설팅 무엇이든 편하게 연락 주세요. 빠르게 답장드릴게요.</p>
+          <!-- 공개용 이메일 주소로 바꾸세요 -->
+          <a href="mailto:hello@example.com" class="btn ghost">✉️ hello@example.com</a>
+          <div class="socials">
+            <!-- 쓰지 않는 채널은 줄을 지우고, href에 실제 주소를 넣으세요 -->
+            <a href="#" target="_blank" rel="noopener">인스타그램</a>
+            <a href="#" target="_blank" rel="noopener">블로그</a>
+            <a href="#" target="_blank" rel="noopener">유튜브</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© <span id="year"></span> 임봉국 컨설팅. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // 연도 자동 표시
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // 모바일 메뉴 열고 닫기
+    const btn = document.querySelector('.menu-btn');
+    const menu = document.getElementById('menu');
+    btn.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+      btn.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+    });
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }));
+
+    // 스크롤 시 메뉴 밑줄
+    const header = document.querySelector('header');
+    addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 10), { passive: true });
+
+    // 스크롤하면 부드럽게 나타나기 + 숫자 카운트
+    const countUp = el => {
+      const end = +el.dataset.count, start = performance.now(), dur = 1200;
+      const tick = now => {
+        const p = Math.min((now - start) / dur, 1);
+        el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))).toLocaleString() + (p === 1 ? '+' : '');
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(entries => entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        e.target.querySelectorAll('[data-count]').forEach(countUp);
+        io.unobserve(e.target);
+      }), { threshold: 0.15 });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+      document.querySelectorAll('[data-count]').forEach(el => el.textContent = (+el.dataset.count).toLocaleString() + '+');
+    }
+  </script>
+</body>
+</html>
